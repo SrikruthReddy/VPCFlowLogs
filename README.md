@@ -14,9 +14,9 @@ The program should generate an output file containing the following:
 2 123456789012 eni-5e6f7g8h 192.168.1.101 198.51.100.3 25 49155 6 10 8000 1620140761 1620140821 ACCEPT OK <br />
 
 ### Sample Lookup Table
-dstport,protocol,tag
-25,tcp,sv_P1
-68,udp,sv_P2
+dstport,protocol,tag <br />
+25,tcp,sv_P1 <br />
+68,udp,sv_P2 <br />
 23,tcp,sv_P1
 
 ## Requirements to Run
