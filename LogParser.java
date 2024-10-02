@@ -24,21 +24,20 @@ class LogParser {
     public static void main(String[] args) {
         // 1st argument corresponds to flow log data as a text 
         // 2nd argument corresponds to look up table as a csv file
-        // 3rd argument corresponds to iana protocol data as a csv file
-        if (args.length < 3) {
+        if (args.length < 2) {
             System.out.println("Please provide the path to the flow log file as the first command-line argument and the path to the lookup table CSV file as the second command-line argument.");
             return;
         }
         String flowLogFilePath = args[0];
         String lookupTablePath = args[1];
-        String ianaProtocolFilePath = args[2];
+        String ianaProtocolFilePath = "iana-protocol-numbers.csv";
         
         Map<String, String> lookupTable = new HashMap<>();
-
+        // parse the iana protocol file and populate the protocol map
         readFile(ianaProtocolFilePath, "iana", null);
-        
+        // parse the lookup table file and populate the lookup table map
         readFile(lookupTablePath, "lookup", lookupTable);
-
+        // parse the flow log file and populate the tag count and port protocol count maps
         readFile(flowLogFilePath, "flowlog", lookupTable);
         
 
@@ -49,7 +48,7 @@ class LogParser {
         writeFile("port_protocol_count.txt", portProtocolCountMap);
 
     }
-
+    // Method to write the output to a file
     public static void writeFile(String filePath, Map<String, Integer> map) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -68,7 +67,7 @@ class LogParser {
             e.printStackTrace();
         }
     }
-
+    // Method to read different kinds of files
     public static void readFile(String filePath, String fileType, Map<String, String> lookupTable) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
